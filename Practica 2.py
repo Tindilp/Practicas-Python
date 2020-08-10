@@ -133,6 +133,62 @@ def ejer8():
         if esPrimo(num):
             print ('El caracter: ',key, ' aparece ', c[key], ' veces - El numero: ', c[key], "es primo")
 
+def ejer9():
+    intentos = 0
+
+    print('Hola! cual es tu nombre?')
+    mi_nombre = input()
+
+    number = random.randint(1, 50)
+    print('Bueno, ' + mi_nombre + ', estoy pensando un numero entre 1 y 50!')
+
+    for intentos in range(6):
+        print('Intentan adivinar cual es.') # Four spaces in front of "print"
+        print('Intento numero: ',intentos)
+        guess = input()
+        guess = int(guess)
+            
+        if guess < number:
+            print('Tu intento es muy bajo.') # Eight spaces in front of "print"
+
+        if guess > number:
+            print('Tu intento es muy alto.')
+
+        if intentos==2:
+            if number%2==0:print('PISTA ADICIONAL: ES PAR.')
+            else:print('PISTA ADICIONAL: ES IMPAR.') 
+
+        if guess == number:
+            break
+
+    if guess == number:
+        intentos = str(intentos + 1)
+        print('Bien, ' + mi_nombre + '! Adivinaste el numero en ' +
+                intentos + ' intentos!')
+
+    if guess != number:
+        number = str(number)
+        print('Nope. El numero en el que pensaba era el ' + number + '.')
+
+def ejer10():
+    imagenes=['im1','im2','im3']
+    imagenesCord=[]
+    for i in range(3):
+        print('ingrese x: ')
+        x=input()
+        print('ingrese y: ')
+        y=input()
+    while y==x:
+        print('El numero ingresado es el mismo que en x, POR FAVOR INGRESE OTRO')
+        y=input()
+        cords=imagenes[i]+ ': (' + x + ',' + y + ')'
+        imagenesCord.append(cords)
+    
+    #imprimo el resultado
+    for w in imagenesCord:
+        print(w)
+
+  
 '''
     Ejer 1 Practica 2
 '''
@@ -181,3 +237,13 @@ def ejer8():
     Ejer 8 Practica 2
 '''
 # ejer8()
+
+'''
+    Ejer 9 Practica 2
+'''
+# ejer9()
+
+'''
+    Ejer 10 Practica 2
+'''
+ejer10()
