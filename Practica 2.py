@@ -3,6 +3,21 @@ import random
 from collections import Counter
 
 def ejer1(tam):
+    '''
+    ENUNCIADO:
+    Dada una lista de strings con el siguiente formato:
+    tam = ['im1 4,14', 'im2 33,15', 'im3 6,34', 'im4 410,134']
+    Donde im1, im2, etc son los nombres de las imágenes y la parte de números 
+    representa el valor de una coordenada (x, y). Se solicita que arme dos 
+    listas que contengan, nombre y luego una tupla de las coordenadas en 
+    formato de números. Una de las listas debe contener los datos en las cuales
+    el valor de x es mayor o igual a un número ingresado por teclado y la otra,
+    contendrá los datos de las imágenes cuyo valor de coordenada sea menor al 
+    número ingresado. Tener en cuenta que los datos de la lista original son 
+    strings y que los números de la lista generada deben ser enteros.
+    Nota: puede utilizar la función string.partition que permite separar un 
+    string y asignar a variables. Investigue su utilización.
+    '''
     list1, list2 = [], []
     num = int(input('ingrese un numero: '))
     for pal in tam:
@@ -13,12 +28,23 @@ def ejer1(tam):
     return list1, list2
 
 def ejer2(tam):
+    '''
+    ENUNCIADO:
+    Dada una lista como la utilizada en el ejercicio 1 genere una lista nueva 
+    que contenga solamente las coordenadas y ordénelas
+    '''
     result = list(map(lambda x: tuple(x.split()[1].split(',')), tam))
     result2 = sorted(list(map(lambda x: (int(x[0]),int(x[1])), result)))
     return result2
 
 def ejer3(lista):
     '''
+    ENUNCIADO:
+    Dada una lista con varios strings, generar una nueva lista que contenga 
+    SOLO aquellos string que representen valores enteros. La misma debe quedar 
+    ordenada. Investigue la función string.isdecimal()
+
+    COMENTARIOS DEL PROGRAMA:
         Filtro los elemtos que son decimales de la lista:
             - El isDecimal() me devuelve true o false si el string es un numero
             - Con el Filter generamos la lista reducida con los elementos decimales
@@ -32,6 +58,17 @@ def ejer3(lista):
     return aEntero
 
 def ejer4(preguntas):
+    '''
+    ENUNCIADO:
+    Dada una lista con preguntas que se responden por ’si’ o ’no y sus
+    respuestas correctas, armar un juego que muestre cada una de las preguntas
+    al jugador, verifique si es correcta o no e incremente el puntaje en caso
+    de acertar. Se debe seleccionar en forma aleatoria la pregunta a mostrar
+    y eliminarla una vez que ya la mostraron. El juego finaliza cuando no hay 
+    más perguntas en la lista. 
+    Tener en cuenta que las respuestas solicitadas al jugador por teclado, 
+    ’si’ y ’no’, pueden darse en mayúsculas o minúsculas.
+    '''
     points = 0
     # en lugar de elegir una a una , mezclo las opciones desde el principio 
     # para no ir eliminando en el proceso    
@@ -47,6 +84,21 @@ def ejer4(preguntas):
     print('Sumaste: ',points,' puntos')    
 
 def ejer5():
+    '''
+    ENUNCIADO:
+    Generar un menú que te permita realizar las siguientes opciones:
+    Menú de opciones para la lista de números a ingresar:
+    1: ingresar números
+    2: ordenar números
+    3: calcular el máximo
+    4: calcular el mínimo
+    5: calcular el promedio
+    0: para terminar
+    Se debe repetir hasta que se ingrese la opción 0. Se debe permitir agregar 
+    números aún luego de haber utilizado las demás operaciones utilizando la 
+    opción 1. En caso que no se haya ingresado ningún número indicar que la 
+    lista está vacía. Investigue las funciones max, min y sum.
+    '''
     ok = True
     lista_numeros = []
     print('Bienvendio al menu')
@@ -85,6 +137,16 @@ def ejer5():
             print('Adios!')            
 
 def ejer6():
+    '''
+    ENUNCIADO:
+    Generar un menú que te permita ingresar dos números por teclado y luego 
+    realizar una de las siguientes operaciones:
+    suma: +
+    resta: - 
+    multiplicación: * 
+    división: /
+    Se debe mostrar el resultado de la operación.
+    '''
     ok = True
     print('''Bienvendio al menu \n
     Primero ingresa dos numeros''')
@@ -112,6 +174,13 @@ def ejer6():
             print('Adios!')            
 
 def ejer7():
+    '''
+    ENUNCIADO:
+    Dado un string ingresado por teclado, determinar si es un palíndromo. 
+    Investigue la operación sobre strings que permite invertirlos. Tener 
+    en cuenta que puede haber mayúsculas y minúsuclas mezcladas en el string
+    ingresado.
+    '''
     texto = input('Ingrese una palabra para ver si es palindromo: ')
     if texto.lower() == texto.lower()[::-1]: print(' Es palindromo')
     else: print(' NO es palindromo')
@@ -125,6 +194,11 @@ def esPrimo(num):
   return True # de lo contrario devuelve Verdadero
 
 def ejer8():
+    '''
+    ENUNCIADO:
+    Dado un string ingresado por teclado determinar si la cantidad total de 
+    veces que aparece cada letra es un número primo
+    '''
     texto = 'Python es genial'
     c = Counter(texto.lower())
     print(c)
@@ -134,6 +208,13 @@ def ejer8():
             print ('El caracter: ',key, ' aparece ', c[key], ' veces - El numero: ', c[key], "es primo")
 
 def ejer9():
+    '''
+    ENUNCIADO:
+    Observar el programa GUESS THE NUMBER en la página web, modifíquelo para 
+    que el rango del número a adivinar sea de 1 hasta 50 y que corte su 
+    ejecución cuando lo adivine. Agregar además que luego de 3 intentos mostrar
+    la pista, una única vez, si el número es par o impar.
+    '''
     intentos = 0
 
     print('Hola! cual es tu nombre?')
@@ -171,6 +252,16 @@ def ejer9():
         print('Nope. El numero en el que pensaba era el ' + number + '.')
 
 def ejer10():
+    '''
+    ENUNCIADO:
+    Dada una lista con nombres de imágenes:
+            imagenes=['im1','im2','im3']
+    Generar una estructura que asocie 3 coordenadas ingresadas por teclado 
+    (x1,y1) , (x2,y2) y (x3,y3) , con cada elemento de la lista (en el mismo
+    orden en que son ingresadas). Además verifique, mientras se van ingresando 
+    las coordenadas, que no hayan repetidas para una misma  imagen; en dicho 
+    caso deberá volver a ingresarla.
+    '''
     imagenes=['im1','im2','im3']
     imagenesCord=[]
     for i in range(3):
@@ -178,9 +269,9 @@ def ejer10():
         x=input()
         print('ingrese y: ')
         y=input()
-    while y==x:
-        print('El numero ingresado es el mismo que en x, POR FAVOR INGRESE OTRO')
-        y=input()
+        while y==x:
+            print('El numero ingresado es el mismo que en x, POR FAVOR INGRESE OTRO')
+            y=input()
         cords=imagenes[i]+ ': (' + x + ',' + y + ')'
         imagenesCord.append(cords)
     
