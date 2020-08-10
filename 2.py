@@ -32,20 +32,56 @@ def ejer3(lista):
 
 def ejer4(preguntas):
     points = 0
-
-    for quest in range(len(preguntas)):
-        indice = random.randrange(len(preguntas))
+    # en lugar de elegir una a una , mezclo las opciones desde el principio 
+    # para no ir eliminando en el proceso    
+    random.shuffle(preguntas)
+    for quest in preguntas:
         print(quest[0])
         ans = input('ingrese su respuesta: ')
-        if ans.lower() == ques[1]:
-            points+=0
+        if ans.lower() == quest[1]:
+            points+=1
+            print('correcto')
         else:
-            print('incorrecto')
-        del preguntas[indice]        
+            print('incorrecto')      
+    print('Sumaste: ',points,' puntos')    
 
-    print(points)    
-
-    
+def ejer5():
+    ok = True
+    lista_numeros = []
+    print('Bienvendio al menu')
+    print('''Menu de opciones para la lista de numeros a ingresar: \n
+             1: ingresar numeros \n
+             2: ordenar numeros \n
+             3: calcular el maximo \n
+             4: calcular el minimo \n
+             5: calcular el promedio \n
+             0: para terminar''')           
+    while( ok ):
+        num = input('Ingrese la opcion elegida')
+        if num == '1':
+            num_add = input('Ingrese un numero para cargar en la lista')
+            lista_numeros.append(int(num_add))
+        elif num == '2':  
+            lista_numeros = sorted(lista_numeros)
+            print('Se ordeno la lista de numeros: ',lista_numeros)
+        elif num == '3':
+            try:
+                print('El numero mas grande de la lista es: ',max(lista_numeros))
+            except ValueError:
+                print('Aun no hay numeros en la lista')    
+        elif num == '4':  
+            try:
+                print('El numero mas chico de la lista es: ',min(lista_numeros))  
+            except ValueError:
+                print('Aun no hay numeros en la lista')  
+        elif num == '5':
+            try:
+                print(sum(lista_numeros)/len(lista_numeros))
+            except Exception:
+                print('Aun no hay numeros en la lista')    
+        elif num == '0': 
+            ok = False  
+            print('Adios!')            
 
 
 '''
@@ -69,10 +105,15 @@ def ejer4(preguntas):
 # print('Ejer 3 : ', list4)
 
 '''
-    Ejer 1 Practica 2
+    Ejer 4 Practica 2
 '''
-preguntas = [['Buenos Aires limita con Santiago del Estero', 'no'], 
-            ['Jujuy limita con Bolivia', 'si'],
-            ['San Juan limita con Misiones', 'no']
-            ]
-ejer4(preguntas)            
+# preguntas = [['Buenos Aires limita con Santiago del Estero', 'no'], 
+#            ['Jujuy limita con Bolivia', 'si'],
+#            ['San Juan limita con Misiones', 'no']
+#            ]
+# ejer4(preguntas)            
+
+'''
+    Ejer 5 Practica 2
+'''
+# ejer5()
