@@ -1,5 +1,6 @@
 
 import random
+from collections import Counter
 
 def ejer1(tam):
     list1, list2 = [], []
@@ -83,6 +84,54 @@ def ejer5():
             ok = False  
             print('Adios!')            
 
+def ejer6():
+    ok = True
+    print('''Bienvendio al menu \n
+    Primero ingresa dos numeros''')
+    num1 = int(input ('Ingresa el numero 1: '))         
+    num2 = int(input ('Ingresa el numero 2: '))  
+    print('''Menu de opciones para realizar operaciones sobre esos dos numeros: \n
+             1: para sumar \n
+             2: para restar \n
+             3: para multiplicar \n
+             4: para dividir \n
+             0: para terminar''')      
+    while( ok ):
+        opc = input('Ingrese la opcion elegida: ')
+        if opc == '1': print('La suma da un total de', num1+num2)
+        elif opc == '2': print('La resta da un total de', num1-num2)
+        elif opc == '3': print('La multiplicacion da un total de', num1*num2)
+        elif opc == '4': 
+            try:
+               print('La division da un total de', num1/num2)  
+            except Exception:
+                print('numero 2 no puede ser 0, vuelva a iniciar')
+                break   
+        elif opc == '0':
+            ok = False 
+            print('Adios!')            
+
+def ejer7():
+    texto = input('Ingrese una palabra para ver si es palindromo: ')
+    if texto.lower() == texto.lower()[::-1]: print(' Es palindromo')
+    else: print(' NO es palindromo')
+
+def esPrimo(num):
+  if num < 2:# si es menos que 2 no es primo, por lo tanto devolverá Falso
+    return False
+  for i in range(2,num): # un rango desde el dos hasta el numero que nosotros elijamos
+    if num % i == 0:# si el resto da 0 no es primo, por lo tanto devuelve Falso
+      return False
+  return True # de lo contrario devuelve Verdadero
+
+def ejer8():
+    texto = 'Python es genial'
+    c = Counter(texto.lower())
+    print(c)
+    for key in c:
+        num = c[key]
+        if esPrimo(num):
+            print ('El caracter: ',key, ' aparece ', c[key], ' veces - El numero: ', c[key], "es primo")
 
 '''
     Ejer 1 Practica 2
@@ -117,3 +166,18 @@ def ejer5():
     Ejer 5 Practica 2
 '''
 # ejer5()
+
+'''
+    Ejer 6 Practica 2
+'''
+# ejer6()
+
+'''
+    Ejer 7 Practica 2
+'''
+# ejer7()
+
+'''
+    Ejer 8 Practica 2
+'''
+# ejer8()
