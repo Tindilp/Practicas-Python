@@ -337,4 +337,4 @@ def ejer10():
 '''
     Ejer 10 Practica 2
 '''
-ejer10()
+# ejer10()
