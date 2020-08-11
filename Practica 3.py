@@ -1,3 +1,5 @@
+import random
+
 def ejer2():
     """
         ENUNCIADO:
@@ -43,6 +45,14 @@ def ejer3():
         Luego imprimir el ranking de los 10 mejores puntajes. Nota: utilizar 
         una expresión lambda para ordenar el diccionario.
     """
+
+    def remplazar(palabra,num):
+        car=' '+palabra[num]+' '
+        for i in palabra:
+            palabra = palabra.replace(i,'-',1)
+        print (palabra[:num] + car +  palabra[num + 1:])
+        # palabra[:num] indica  la posicion del nuevo caracter
+        # palabra[num + 1:], se remplaza con el caracter guardado PREGUNTAR! 
 
     jugadores = {
             'Tomy':{"Puntaje":10, "Nivel":5, "Tiempo":2},
@@ -95,12 +105,92 @@ def ejer3():
     print('===== TOP TEN =====')
     print(jugadoresXL_or[:10])
 
+def ejer4():
+    """
+        ENUNCIADO:
+        Dado el siguiente diccionario donde las claves son nombres de animales 
+        y los valores representan posiciones:
+        anim={’Gato Montes’:2,’Yacare overo’:4,’Boa acuática’:5}
+        Imprimir un string por cada animal de la estructura, reemplazando sus 
+        caracteres por el string ’_ ’ (inclusive los espacios en blanco) salvo 
+        el carácter correspondiente al valor del mismo.
+    """
+    anim={'Gato Montes':2,'Yacare overo':4,'Boa acuatica':5}
+    for key in anim:
+        print  (key, ':' , anim[key])
+        remplazar(key,anim[key])
+ 
+def ejer5():
+    """
+        ENUNCIADO:
+        Generar una estructura que contenga coordenadas y un color asociado.
+        La forma de asociar las coordenadas con el color debe ser aleatoria sin
+        importar que se repitan los colores elegidos.
+
+        Generar una estructura que contenga coordenadas y un color asociado. La
+        forma de asociar las coordenadas con el color debe ser aleatoria sin que
+        se repitan los colores.
+    """
+
+    def sumar(): 
+        num1 = random.randrange(0,100)
+        num2 = random.randrange(0,100)
+        resultado=int(input('cual es resultado de sumar {} y {} ? ingrese el resultado: '.format(num1,num2)))
+        if (num1+num2 == resultado):
+            print('resultado correcto')
+        else:  
+            print('resultado incorrecto')
+
+    def tipoPalabra():
+        palabras = [('grave',['molesto']), ('aguda',['ratón']), ('esdrujula',['murciélago'])]
+        num3 = random.randrange(0,len(palabras))
+        tipo=input('La palabra {} es grave, aguda, o esdrujula? Ingrese la respuesa: '.format(palabras[num3][1]))
+        if (tipo==palabras[num3][0]):
+            print ('correcto')
+        else:
+            print('incorrecto')
+    
+    colores = ['azul','amarillo','rojo','blanco','negro']
+    coordenadas = [(2,3),(5,6),(8,8),(10,2),(-5,-8)]
+    coord2 = coordenadas.copy()
+    lista = []
+    dic = {}
+
+    for i in range(len(colores)):
+        num = random.randrange(0,len(colores))
+        num2 = random.randrange(0,len(coordenadas))
+        tupla = (colores[num],coordenadas[num2])
+        coordenadas.remove(coordenadas[num2])
+        lista.append(tupla)
+    print(lista)
+
+    for i in range(len(coord2)):
+        num = random.randrange(0,len(coord2))
+        tupla = (colores[i],coord2[num])
+        dic[coord2[i]] = colores[num] 
+    print(dic)  
+
+    color=dic[(2, 3)]
+    # fijate como podes simplificar todo esto, te doy una pista funciones = {'negro' = sumar, 'amarillo' = tipoPalabra}
+    if (color in {'negro','azul'}): sumar()
+    elif(color in {'amarillo','rojo','blanco'}): tipoPalabra()
+
 '''
     Ejer 2 Practica 3
 '''
-#ejer2()
+# ejer2()
 
 '''
     Ejer 3 Practica 3
 '''
-#ejer3()
+# ejer3()
+
+'''
+    Ejer 4 Practica 3
+'''
+# ejer4()
+
+'''
+    Ejer 5 Practica 3
+'''
+ejer5()
