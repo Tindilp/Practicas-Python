@@ -208,4 +208,3 @@ def ejer5y6():
     Ejer 5 y 6 Practica 3
 '''
 ejer5y6()
-5
