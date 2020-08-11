@@ -120,9 +120,10 @@ def ejer4():
         print  (key, ':' , anim[key])
         remplazar(key,anim[key])
  
-def ejer5():
+def ejer5y6():
     """
         ENUNCIADO:
+        5-
         Generar una estructura que contenga coordenadas y un color asociado.
         La forma de asociar las coordenadas con el color debe ser aleatoria sin
         importar que se repitan los colores elegidos.
@@ -130,6 +131,19 @@ def ejer5():
         Generar una estructura que contenga coordenadas y un color asociado. La
         forma de asociar las coordenadas con el color debe ser aleatoria sin que
         se repitan los colores.
+        
+        6-
+        Usando el diccionario del Ejercicio 5, acceder a las coordenadas (x,y) 
+        y, según el color asociado, ejecutar una función asociada a la misma. 
+        Las funciones pueden plantear la resolución de ejercicios simples como 
+        ser:
+        
+        (a) Suma de dos números que se generen en forma aleatoria cada vez que 
+        se llama a la función, reciba el resultado por teclado y verifique el 
+        resultado.
+        
+        (b) Dada la estructura que contiene palabras clasificadas según su 
+        acentuación:
     """
 
     def sumar(): 
@@ -191,6 +205,6 @@ def ejer5():
 # ejer4()
 
 '''
-    Ejer 5 Practica 3
+    Ejer 5 y 6 Practica 3
 '''
-ejer5()
+ejer5y6()
