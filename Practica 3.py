@@ -197,7 +197,7 @@ def ejer5y6():
 '''
     Ejer 3 Practica 3
 '''
-# ejer3()
+ejer3()
 
 '''
     Ejer 4 Practica 3
@@ -207,4 +207,11 @@ def ejer5y6():
 '''
     Ejer 5 y 6 Practica 3
 '''
-ejer5y6()
+# ejer5y6()
+
+'''
+    Ejer 7 Practica 3
+'''
+# ejer5y6()
+
+
