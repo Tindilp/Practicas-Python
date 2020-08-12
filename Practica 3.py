@@ -277,8 +277,6 @@ def ejer10(operador,*args,**kwargs):
     else:
          print('El resultado es: ', reduce(lambda a, b: a*b, *args),' La operacion la solicito ', kwargs['nombre'],kwargs['apellido'] )
       
-
-
 '''
     Ejer 2 Practica 3
 '''

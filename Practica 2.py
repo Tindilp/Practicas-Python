@@ -279,7 +279,6 @@ def ejer10():
     for w in imagenesCord:
         print(w)
 
-  
 '''
     Ejer 1 Practica 2
 '''
