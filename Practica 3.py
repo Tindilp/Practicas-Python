@@ -1,4 +1,6 @@
 import random
+from functools import reduce
+
 
 def ejer2():
     """
@@ -22,9 +24,10 @@ def ejer2():
         d.setdefault(len(each), set()).add(each)
     print(d)         
 
-def ejer3():
+def ejer3y7():
     """
         ENUNCIADO:
+        3-
         Seleccione la estructura que considere más adecuada para almacenar la i
         nformación de varios usuarios ingresados desde teclado. Tener en cuenta
         que se necesita acceder a un usuario determinado en forma directa sin
@@ -44,6 +47,19 @@ def ejer3():
 
         Luego imprimir el ranking de los 10 mejores puntajes. Nota: utilizar 
         una expresión lambda para ordenar el diccionario.
+        
+        ENUNCIADO:
+        7-
+        Utilizar como estructura de datos de referencia la generada en el 
+        ejercicio 3 y generar funciones que ejecuten lo siguiente:
+        
+        (a) Imprimir los 10 primeros puntajes de la estructura.
+        
+        (b) Imprimir los datos de los usuarios ordenados alfabéticamente por
+        apellido.
+        
+        (c) Imprimir los datos de los usuarios ordenados por nivel alcanzado.
+         Nota: utilice expresiones lambda para resolver los incisos.
     """
 
     def remplazar(palabra,num):
@@ -59,6 +75,14 @@ def ejer3():
             'Dani':{"Puntaje":45, "Nivel":2, "Tiempo":200},
             'Celes':{"Puntaje":100, "Nivel":3, "Tiempo":70},
             'Sumi':{"Puntaje":3, "Nivel":7, "Tiempo":30},
+            'Fili':{"Puntaje":15, "Nivel":5, "Tiempo":2},
+            'Tindi':{"Puntaje":200, "Nivel":2, "Tiempo":200},
+            'Kuro':{"Puntaje":120, "Nivel":3, "Tiempo":70},
+            'Pepe':{"Puntaje":300, "Nivel":7, "Tiempo":30},
+            'Toti':{"Puntaje":35, "Nivel":5, "Tiempo":2},
+            'Tina':{"Puntaje":80, "Nivel":2, "Tiempo":200},
+            'Mini':{"Puntaje":170, "Nivel":3, "Tiempo":70},
+            'Fede':{"Puntaje":50, "Nivel":7, "Tiempo":30},
           }
 
     # Con la estructura generada, imprimir los datos de un usuario dado sin 
@@ -96,7 +120,7 @@ def ejer3():
     puntaje_jugada = input("Ingrese puntaje de la jugada de {nombre_jugador}: ")
     nivel_jugada = input("Ingrese nivel de la jugada de {nombre_jugador}: ")
     tiempo_jugada = input("Ingrese tiempo de la jugada de {nombre_jugador}: ")
-    juga_nuevo = {'Nivel': nivel_jugada, 'Puntaje': puntaje_jugada, 'Tiempo': tiempo_jugada}
+    juga_nuevo = {'Nivel': int(nivel_jugada), 'Puntaje': int(puntaje_jugada), 'Tiempo': int(tiempo_jugada)}
     jugadores.setdefault(nombre_jugador,juga_nuevo)
     print('JUGADORES CON NUEVOS: ',jugadores)
     
@@ -104,6 +128,23 @@ def ejer3():
     jugadoresXL_or = sorted(jugadores.items(), key=lambda punt: punt[1]['Puntaje'],reverse=True)
     print('===== TOP TEN =====')
     print(jugadoresXL_or[:10])
+
+    # Parte del Ejercicio 7
+
+    # Imprimir los 10 primeros puntajes de la estructura.
+    print('++++++++++++++++++  EJER 7 1 ++++++++++++++++++++++')
+    result=list(map(lambda x: ["key {}, value {} ".format(x,  jugadores[x])], jugadores))[0:10]
+    print(result)
+
+    print('++++++++++++++++++  EJER 7 2  ++++++++++++++++++++++')
+    # Imprimir los datos de los usuarios ordenados alfabéticamente por apellido.
+    jugadores_nom = sorted(jugadores.items(), key=lambda punt: punt)
+    print(jugadores_nom)
+
+    print('++++++++++++++++++  EJER 7 3  ++++++++++++++++++++++')
+    # Imprimir los datos de los usuarios ordenados por nivel alcanzado.
+    jugadores_nivel = sorted(jugadores.items(), key=lambda punt: punt[1]['Nivel'])
+    print(jugadores_nivel)
 
 def ejer4():
     """
@@ -156,7 +197,7 @@ def ejer5y6():
             print('resultado incorrecto')
 
     def tipoPalabra():
-        palabras = [('grave',['molesto']), ('aguda',['ratón']), ('esdrujula',['murciélago'])]
+        palabras = [('grave',['molesto']), ('aguda',['raton']), ('esdrujula',['murcielago'])]
         num3 = random.randrange(0,len(palabras))
         tipo=input('La palabra {} es grave, aguda, o esdrujula? Ingrese la respuesa: '.format(palabras[num3][1]))
         if (tipo==palabras[num3][0]):
@@ -189,6 +230,55 @@ def ejer5y6():
     if (color in {'negro','azul'}): sumar()
     elif(color in {'amarillo','rojo','blanco'}): tipoPalabra()
 
+def ejer8():
+    """
+        ENUNCIADO:
+        Definir dos funciones que reciban una cantidad variable de argumentos:
+        a) una función que puede llegar a recibir hasta 30 números como 
+        parámetros y debe devuelva la suma total de los mismos
+        b) otra función que reciba un número variable de parámetros nombrados 
+        (usar **kwargs), e imprima dichos parámetros. De antemano no se sabe 
+        cuáles de los siguientes tres posibles parámetros se reciben:
+        nombre apellido sexo
+    """
+    def sumar(*args):
+        print(reduce(lambda x,y: x+y, list(args)))
+
+    def mostrarParametros(**kwargs):
+        [print(x) for x in kwargs]
+      
+    sumar(23,3,4,56,7,8,9,10,77,89)
+    mostrarParametros(nombre = 'pepe',apellido = 'diaz',sexo = 'hombre',apellido2='dss')
+
+def ejer9(*args):
+    """
+        ENUNCIADO:
+        Escribir una función que reciba una cantidad variable de argumentos 
+        correspondientes a nombres de personas e imprima por pantalla los 
+        nombres enumerándolos.
+        Nota: consultar el uso de enumerate.
+    """
+    [print(name) for name in enumerate(args,0)]
+
+def ejer10(operador,*args,**kwargs):
+    """
+        ENUNCIADO:
+        Escribir una función que reciba al menos un argumento y opcionalmente
+        una lista de argumentos variables y una lista de argumentos con nombre.
+        El argumento fijo deberá ser la operación que se desea hacer con lista
+        de números que se reciba como variable y los argumentos con nombre 
+        corresponden a los datos de la persona que solicitó la operación. Las 
+        operaciones posibles son: “+” y “*”. Los datos con nombre variables 
+        pueden ser: nombre, apellido y dirección. 
+        Nota: investigar la función reduce del módulo functools.
+    """
+    if (operador=='+'):
+         print('El resultado es: ', reduce(lambda a, b: a+b, *args),' La operacion la solicito ', kwargs['nombre'],kwargs['apellido'] ) 
+    else:
+         print('El resultado es: ', reduce(lambda a, b: a*b, *args),' La operacion la solicito ', kwargs['nombre'],kwargs['apellido'] )
+      
+
+
 '''
     Ejer 2 Practica 3
 '''
@@ -197,7 +287,7 @@ def ejer5y6():
 '''
     Ejer 3 Practica 3
 '''
-ejer3()
+# ejer3y7()
 
 '''
     Ejer 4 Practica 3
@@ -210,8 +300,18 @@ ejer3()
 # ejer5y6()
 
 '''
-    Ejer 7 Practica 3
+    Ejer 8 Practica 3
 '''
-# ejer5y6()
+#ejer8()
+
+'''
+    Ejer 9 Practica 3
+'''
+#ejer9("Dani 1","Tomy 2","Lucas 3")
+
+'''
+    Ejer 10 Practica 3
+'''
+#ejer10("*",[1,2,3,4,5],nombre='Lucas',apellido='Di Lorenzo')
 
 
