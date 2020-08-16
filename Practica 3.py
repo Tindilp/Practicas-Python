@@ -156,6 +156,14 @@ def ejer4():
         caracteres por el string ’_ ’ (inclusive los espacios en blanco) salvo 
         el carácter correspondiente al valor del mismo.
     """
+    def remplazar(palabra,num):
+        car=' '+palabra[num]+' '
+        for i in palabra:
+            palabra=palabra.replace(i,'-',1)
+        print (palabra[:num] + car +  palabra[num + 1:])
+        #palabra[:num] indica  la posicion del nuevo caracter
+        #palabra[num + 1:], se remplaza con el caracter guardado PREGUNTAR!
+
     anim={'Gato Montes':2,'Yacare overo':4,'Boa acuatica':5}
     for key in anim:
         print  (key, ':' , anim[key])
