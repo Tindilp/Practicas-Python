@@ -24,6 +24,7 @@ def ejer2():
         d.setdefault(len(each), set()).add(each)
     print(d)         
 
+
 def ejer3y7():
     """
         ENUNCIADO:
@@ -146,6 +147,7 @@ def ejer3y7():
     jugadores_nivel = sorted(jugadores.items(), key=lambda punt: punt[1]['Nivel'])
     print(jugadores_nivel)
 
+
 def ejer4():
     """
         ENUNCIADO:
@@ -168,7 +170,8 @@ def ejer4():
     for key in anim:
         print  (key, ':' , anim[key])
         remplazar(key,anim[key])
- 
+
+
 def ejer5y6():
     """
         ENUNCIADO:
@@ -238,6 +241,7 @@ def ejer5y6():
     if (color in {'negro','azul'}): sumar()
     elif(color in {'amarillo','rojo','blanco'}): tipoPalabra()
 
+
 def ejer8():
     """
         ENUNCIADO:
@@ -258,6 +262,7 @@ def ejer8():
     sumar(23,3,4,56,7,8,9,10,77,89)
     mostrarParametros(nombre = 'pepe',apellido = 'diaz',sexo = 'hombre',apellido2='dss')
 
+
 def ejer9(*args):
     """
         ENUNCIADO:
@@ -267,6 +272,7 @@ def ejer9(*args):
         Nota: consultar el uso de enumerate.
     """
     [print(name) for name in enumerate(args,0)]
+
 
 def ejer10(operador,*args,**kwargs):
     """

@@ -2,15 +2,19 @@ import PySimpleGUI as sg
 import json
 import time
 from datetime import datetime
+from pattern.es import conjugate
+from pattern.es import INFINITIVE
+from pattern.es import parse,split
+
 
 def ejer1():
     """
-        ENUNCIADO:
-        Diagrame una interfaz en PySimpleGUI que permita ingresar dos datos: 
-        temperatura y humedad, junto con la fecha y hora actual. Al presionar
-        Añadir , deberá cargar los valores en una lista (Listbox). Añada un
-        botón, que permita guardar esta información en un archivo en formato
-        json.
+    ENUNCIADO:
+    Diagrame una interfaz en PySimpleGUI que permita ingresar dos datos: 
+    temperatura y humedad, junto con la fecha y hora actual. Al presionar
+    Añadir , deberá cargar los valores en una lista (Listbox). Añada un
+    botón, que permita guardar esta información en un archivo en formato
+    json.
     """
     info_clima = {}
     layout = [
@@ -34,7 +38,7 @@ def ejer1():
             info_clima['fec_y_hora']=fec_y_hora,{'Temperatura':values['temp'],'Humedad':values['humed']}
             with open('ejer1.json','a+') as file:
                 json.dump(info_clima,file,indent=4)
-
+ 
 
 def ejer2():
     """
@@ -112,6 +116,57 @@ def ejer2():
     with open('infoJugadores.txt','w') as arch:             
         json.dump(jugadores, arch,indent=4)
     modificoDatos()        
+ 
+ 
+def ejer3():
+    """
+    ENUNCIADO:
+    Leer un texto desde un archivo y generar uno nuevo (denominado verbos.
+    json) que contenga una estructura con todos los verbos convertidos a 
+    infinitivo junto con la cantidad de apariciones de cada uno.
+    """
+    #GENRERO EL ARCHIVO PARA USAR
+    with open('ejer3.txt','w') as arch:
+        json.dump('Hola, Como andas trolo vamos a corre soy yo o sos vos corre',arch)
+  
+
+    #ABRO EL ARCHIVO Y GUARDO LOS DATOS
+    with open('ejer3.txt','r') as archi:
+        datos = json.load(archi)
+   
+    #datos=['hola, lucas perro gato']
+    #PRIMERO OBTENGO LOS DATOS DE CADA PALABRA Y LUEGO DIVIDO LA FRASE
+    s=parse(datos).split()
+
+    #CREO UNA LISTA PARA GUARDAR LOS VERBOS EN INFINITIVO
+    listaInfinitivos=[]
+    for pal in s[0]:
+        print(pal)
+        if pal[1]=='VB':
+            listaInfinitivos.append(conjugate(pal[0],INFINITIVE))
+
+    #CREO OTRA LISTA PARA CONTAR LAS OCURRENCIAS DE CADA VERBO
+    recuenciaPalab=[]
+    for pal in listaInfinitivos:
+        recuenciaPalab.append(listaInfinitivos.count(pal))
+
+    #PRIMERO UNO LAS LISTAS CON EL ZIP, ME QUEDARA CADA PALABRA CON SU CANTIDAD
+    #CORRESPONDIENTE DE OCURRENCIAS, AL FINAL(CON EL SET) LO TRANSFORMO EN UN CONJUNTO PARA
+    #ELIMININAR LAS REPETICIONES
+    conjuntoFinal=(set(list(zip(listaInfinitivos,recuenciaPalab))))
+
+    
+    #TRANSFORMO EL CONJUNTO FINAL EN UN DICCIONARIO PARA PODER EXPORTARLO AL ARCHIVO JSON
+    dic={}
+    for elem in conjuntoFinal:
+        palabra=elem[0]
+        cantidad=elem[1]
+        dic.setdefault(palabra,cantidad)
+
+    #EXPORTO EL ARCHIVO
+    with open('verbos.json','w') as archivoFinal:
+        json.dump(dic,archivoFinal,indent=4)
+ 
 
 '''
     Ejer 1 Practica 4
@@ -126,5 +181,5 @@ def ejer2():
 '''
     Ejer 3 Practica 4
 '''
-#ejer2()
+#ejer3()
 

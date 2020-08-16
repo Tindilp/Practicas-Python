@@ -27,6 +27,7 @@ def ejer1(tam):
             list2.append(pal)    
     return list1, list2
 
+
 def ejer2(tam):
     '''
     ENUNCIADO:
@@ -36,6 +37,7 @@ def ejer2(tam):
     result = list(map(lambda x: tuple(x.split()[1].split(',')), tam))
     result2 = sorted(list(map(lambda x: (int(x[0]),int(x[1])), result)))
     return result2
+
 
 def ejer3(lista):
     '''
@@ -56,6 +58,7 @@ def ejer3(lista):
     filterList= list(filter(lambda x: x.isdecimal(), lista ))
     aEntero = sorted(list(map(lambda x: int(x), filterList)))
     return aEntero
+
 
 def ejer4(preguntas):
     '''
@@ -82,6 +85,7 @@ def ejer4(preguntas):
         else:
             print('incorrecto')      
     print('Sumaste: ',points,' puntos')    
+
 
 def ejer5():
     '''
@@ -136,6 +140,7 @@ def ejer5():
             ok = False  
             print('Adios!')            
 
+
 def ejer6():
     '''
     ENUNCIADO:
@@ -173,6 +178,7 @@ def ejer6():
             ok = False 
             print('Adios!')            
 
+
 def ejer7():
     '''
     ENUNCIADO:
@@ -185,13 +191,6 @@ def ejer7():
     if texto.lower() == texto.lower()[::-1]: print(' Es palindromo')
     else: print(' NO es palindromo')
 
-def esPrimo(num):
-  if num < 2:# si es menos que 2 no es primo, por lo tanto devolverá Falso
-    return False
-  for i in range(2,num): # un rango desde el dos hasta el numero que nosotros elijamos
-    if num % i == 0:# si el resto da 0 no es primo, por lo tanto devuelve Falso
-      return False
-  return True # de lo contrario devuelve Verdadero
 
 def ejer8():
     '''
@@ -199,6 +198,15 @@ def ejer8():
     Dado un string ingresado por teclado determinar si la cantidad total de 
     veces que aparece cada letra es un número primo
     '''
+
+    def esPrimo(num):
+        if num < 2:# si es menos que 2 no es primo, por lo tanto devolverá Falso
+            return False
+        for i in range(2,num): # un rango desde el dos hasta el numero que nosotros elijamos
+            if num % i == 0:# si el resto da 0 no es primo, por lo tanto devuelve Falso
+                return False
+        return True # de lo contrario devuelve Verdadero
+
     texto = 'Python es genial'
     c = Counter(texto.lower())
     print(c)
@@ -206,6 +214,7 @@ def ejer8():
         num = c[key]
         if esPrimo(num):
             print ('El caracter: ',key, ' aparece ', c[key], ' veces - El numero: ', c[key], "es primo")
+
 
 def ejer9():
     '''
@@ -250,6 +259,7 @@ def ejer9():
     if guess != number:
         number = str(number)
         print('Nope. El numero en el que pensaba era el ' + number + '.')
+
 
 def ejer10():
     '''
