@@ -1,10 +1,10 @@
-Lightskyblue 
+yellow 
 Violet 
 Red 
 Orange 
 Magenta 
 Lime 
-Grey
-yellow 
+Lightskyblue 
+Grey 
 Green 
-Cyan 
+Cyan
