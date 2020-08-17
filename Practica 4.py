@@ -198,7 +198,7 @@ def ejer4y5():
               [sg.Graph(canvas_size=(200,200), graph_bottom_left=(0, 0), graph_top_right=(150, 150), background_color='white', enable_events=True, key='graph')],
               [sg.Button('Guardar colores',visible=False)]
              ]
-    window = sg.Window('Ejer4',layout)
+    window = sg.Window('Ejer4y5',layout)
     while True:
         event, values = window.read()
         if event is 'Cancel' or event is None:
@@ -238,7 +238,70 @@ def ejer4y5():
                 for i in lista:
                     coords = i[1].split(',')
                     writer.writerow({'Coord X': int(coords[0]),'Coord Y':int(coords[1]), 'Color': i[0]})
-     
+
+
+def ejer6():
+    """
+    6-
+    ENUNCIADO:
+    En base a los ejercicios anteriores, genere una ventana en la que se permita
+    seleccionar un color de una lista (InputCombo, cargada desde el archivo de
+    colores) y los valores de x e y de las coordenadas (con dos Slider). Al 
+    presionar Añadir, deberá cargar los valores en una lista (Listbox). Añada un
+    botón, que permita guardar la lista de colores/coordenadas en un archivo en 
+    formato json.
+    """
+    layout1 = [[sg.Text('Seleccione los archivos de Txt')],
+              [sg.Text('Source for colores', size=(15, 1)), sg.InputText(), sg.FileBrowse(key='COLORES')],
+              [sg.Text('Source for coordenadas', size=(15, 1)), sg.InputText(), sg.FileBrowse(key='COORDENADAS')],
+              [sg.Button('Cargar'), sg.Cancel()]]
+    layout2 = [[sg.Text('SELECCIONE UN COLOR')],
+              [sg.InputCombo('colores', size=(20, 1),key='_LIST_')],
+              [sg.Text('SELECCIONE UNA COORDENADA DE X')],
+              [sg.T('0',key='_LEFTX_'), sg.Slider((1,100), key='_SLIDERX_', orientation='h', enable_events=True, disable_number_display=True), sg.T('0', key='_RIGHTX_')],
+              [sg.Text('SELECCIONE UNA COORDENADA DE Y')],
+              [sg.T('0',key='_LEFTY_'), sg.Slider((1,100), key='_SLIDERY_', orientation='h', enable_events=True, disable_number_display=True), sg.T('0', key='_RIGHTY_')],
+              [sg.Button('AÑADIR'),sg.Button('SALIR')],
+              [sg.Text('VALORES AÑADIDOS')],
+              [sg.Listbox('' , size=(50,10), key='-VALORES-', enable_events=True)],
+              [sg.Button('GUARDAR VALORES')]
+             ]
+    layout = [
+             [sg.Column(layout2,key = 'lay2', visible=False)],
+             [sg.Column(layout1,key = 'lay1')]
+             ]
+    window = sg.Window('Ejer6',layout)
+    choices = []
+    while True:
+        event, values = window.read()
+        window['_LEFTX_'].update(values['_SLIDERX_'])  
+        window['_RIGHTX_'].update(values['_SLIDERX_'])  
+        window['_LEFTY_'].update(values['_SLIDERY_'])  
+        window['_RIGHTY_'].update(values['_SLIDERY_'])  
+        if event is 'Cancel' or event is None or event is 'SALIR':
+            break
+        if event is 'Cargar':   
+            try:
+                c = open(values[0],'r')
+                x = open(values[1],'r')
+                colores = c.read().split()
+                coordenadas = x.read().split()
+                window['lay1'].Update(visible=False)
+                window['lay2'].Update(visible=True)
+                window['_LIST_'].Update(values=colores)
+            except FileNotFoundError:
+                sg.popup('No se cargaron los archivos')
+        if event is 'AÑADIR':
+            col = values['_LIST_']
+            x = int(values['_SLIDERX_'])
+            y = int(values['_SLIDERY_'])
+            cord = (x,y)
+            choices.append({'Color':col,'Coordenadas X':cord[0],'Coordenadas Y':cord[1]})
+            window['-VALORES-'].update(choices)
+        if event == 'GUARDAR VALORES':
+            with open('ejer6.json','w') as f:
+                json.dump(choices,f,indent=4)      
+
 
 '''
     Ejer 1 Practica 4
@@ -257,4 +320,8 @@ def ejer4y5():
 '''
     Ejer 4y5 Practica 4
 '''
-ejer4y5()
+#ejer4y5()
+'''
+    Ejer 6 Practica 4
+'''
+ejer6()
