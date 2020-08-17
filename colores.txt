@@ -1,0 +1,10 @@
+yellow 
+Violet 
+Red 
+Orange 
+Magenta 
+Lime 
+Lightskyblue 
+Grey 
+Green 
+Cyan 
