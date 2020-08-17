@@ -1,5 +1,6 @@
 import PySimpleGUI as sg
 import json
+import csv
 import time
 from datetime import datetime
 from pattern.es import conjugate
@@ -169,8 +170,9 @@ def ejer3():
         json.dump(dic,archivoFinal,indent=4)
  
 
-def ejer4():
+def ejer4y5():
     """
+    4-
     ENUNCIADO:
     En base al ejercicio 5 de la Práctica 3, diagramar una interfaz en 
     PySimpleGUI que permita seleccionar dos archivos (utilizando el widget
@@ -181,12 +183,20 @@ def ejer4():
     ambos archivos). Para realizar las pruebas, genere ambos archivos. Para
     generar el de colores, investigue los disponibles en el ejemplo de colores
     en Github.
+    5-
+    ENUNCIADO:    
+    En base al ejercicio anterior, guarde en un nuevo archivo las coordenadas
+    y los colores (ya asociados) al presionar un botón "Guardar". ¿Cómo haría
+    para almacenar la estructura completa en un archivo de texto plano?
+    Implementarlo teniendo en cuenta la separación de las coordenadas y los 
+    colores.
     """
     layout = [[sg.Text('Seleccione los archivos de Txt')],
               [sg.Text('Source for colores', size=(15, 1)), sg.InputText(), sg.FileBrowse(key='COLORES')],
               [sg.Text('Source for coordenadas', size=(15, 1)), sg.InputText(), sg.FileBrowse(key='COORDENADAS')],
               [sg.Button('Cargar'), sg.Cancel()],     
-              [sg.Graph(canvas_size=(200,200), graph_bottom_left=(0, 0), graph_top_right=(150, 150), background_color='white', enable_events=True, key='graph')]
+              [sg.Graph(canvas_size=(200,200), graph_bottom_left=(0, 0), graph_top_right=(150, 150), background_color='white', enable_events=True, key='graph')],
+              [sg.Button('Guardar colores',visible=False)]
              ]
     window = sg.Window('Ejer4',layout)
     while True:
@@ -216,11 +226,19 @@ def ejer4():
                     print(i)
                     coords=i[1].split(',')
                     window['graph'].draw_point((int(coords[0]),int(coords[1])), 30, color=i[0])
+                window['Guardar colores'].update(visible=True)    
             except FileNotFoundError:
                 sg.popup('No se cargaron los archivos')
-
- 
-    
+        # ejercicio 5
+        if event is 'Guardar colores':    
+            fieldnames = ['Coord X','Coord Y','Color']
+            with open('coord.csv','w',newline = "") as file:
+                writer = csv.DictWriter(file, fieldnames=fieldnames)
+                writer.writeheader()    
+                for i in lista:
+                    coords = i[1].split(',')
+                    writer.writerow({'Coord X': int(coords[0]),'Coord Y':int(coords[1]), 'Color': i[0]})
+     
 
 '''
     Ejer 1 Practica 4
@@ -237,6 +255,6 @@ def ejer4():
 '''
 #ejer3()
 '''
-    Ejer 4 Practica 4
+    Ejer 4y5 Practica 4
 '''
-ejer4()
+ejer4y5()
