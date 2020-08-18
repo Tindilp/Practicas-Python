@@ -303,6 +303,89 @@ def ejer6():
                 json.dump(choices,f,indent=4)      
 
 
+def ejer7():
+    """
+    ENUNCIADO:
+    Dado el archivo que detalla la cantidad de mujeres que estudian carreras
+    tecnológicas (Ver archivo mujeresEnCarrera.csv), realizar los siguientes
+    ejercicios:
+
+    Informar la cantidad total de estudiantes mujeres por universidad.
+    
+    Generar una interfaz en PySimpleGUI que muestre las cantidades agrupadas
+    por universidad ordenadas de mayor a menor.
+    
+    Mostrar las cantidades de cada universidad representadas por algún elemento
+    gráfico de tamaño proporcional a la cantidad mayor.
+    
+    Incorporar la posibilidad de seleccionar el archivo desde la misma interfaz.
+    
+    Agregar la funcionalidad que el botón que permita ordenar esté deshabilitado
+    hasta que se seleccione el archivo.
+
+    Nota: Investigue en el repositorio github del proyecto PySimpleGUI posibles
+    ejemplos para utilizar gráficos.
+    """
+    def ordenar_diccionario(dic): 
+        #retorna lista ordenada.
+        return sorted(dic.items(), key=lambda item: item[1], reverse= True)
+
+    def abrir_procesar(csv_reader):
+        col_mujeres = 10 # la columna en que se encuentran la cantidad de mujeres es la 10
+        col_universidad = 2 # la columna en que se encuentran la universidad es la 2
+        dic = {}
+        for row in csv_reader:
+            # vamos a recoorer todo el archivo guardando datos
+            # primero guardo la universidad actual.
+            universidad_actual = row[col_universidad] 
+            # luego la cantidad de mujeres de esa univeridad
+            # Sí el lugar de cant mujeres tiene '' -> cantMujeres = 0. sino, retorno la cantidad
+            mujeres_actual = (int(row[col_mujeres])if row[col_mujeres] != '' else 0)
+
+
+            #Sí la universidad no existe en el diccionario, la agregamos
+            if universidad_actual not in dic:
+                dic[universidad_actual] = [mujeres_actual]
+            #sino, la actualizamos con las cantidades guardadas
+            else:
+                dic[universidad_actual][0] += mujeres_actual
+
+        lista_ordenada = ordenar_diccionario(dic)
+        return lista_ordenada
+
+    layout = [[sg.Text('Seleccione el archivo cvs')],
+              [sg.Text('Archivo:', size=(5, 1)), sg.InputText(key='in_file'), sg.FileBrowse(key='mujeres')],
+              [sg.Button('Cargar'),sg.Button('Salir')],
+              [sg.Button('Mostrar ordenado',key= 'ordenar',disabled=True),sg.Button('Mostrar grafico',key= 'graf',disabled=True)],
+              [sg.Listbox(values='',size = (40,10),key = 'lista',enable_events=True),sg.Graph(canvas_size=(400,200), graph_bottom_left=(0, 0), graph_top_right=(0, 0), background_color='white', enable_events=True, key='graph')]
+             ]
+    window = sg.Window('Ejer7',layout)   
+    while True:
+        event , values = window.read() 
+        if event is 'Salir' or event is None:
+            break 
+        if event is 'Cargar':
+            try:
+                path = values['in_file']
+                with open(path,'r',encoding='utf8') as arch:
+                    csv_reader = csv.reader(arch,delimiter=',',quotechar = '"')
+                    next(arch)
+                    lista_ordenada = abrir_procesar(csv_reader)
+                window['ordenar'].update(disabled=False)
+                window['graf'].update(disabled=False)
+            except FileNotFoundError:
+                sg.popup("no fue encontrado tal archivo")    
+        if event is 'ordenar':
+            window['lista'].update(map(lambda x: "{}: {}".format(x[0], (str(x[1][0]))),lista_ordenada))   
+        if event is 'graf': 
+            i = 0
+            for element in lista_ordenada:
+                i += 1
+                print((element[1][0],' - ',i))
+                window['graph'].draw_line((i, 0), (i, element[1][0]),color='blue',width=2)
+                
+
+
 '''
     Ejer 1 Practica 4
 '''
@@ -324,4 +407,8 @@ def ejer6():
 '''
     Ejer 6 Practica 4
 '''
-ejer6()
+#ejer6()
+'''
+    Ejer 7 Practica 4
+'''
+ejer7()
