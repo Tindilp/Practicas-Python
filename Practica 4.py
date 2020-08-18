@@ -377,6 +377,7 @@ def ejer7():
                 sg.popup("no fue encontrado tal archivo")    
         if event is 'ordenar':
             window['lista'].update(map(lambda x: "{}: {}".format(x[0], (str(x[1][0]))),lista_ordenada))   
+        # No funciona el grafico y no se porque 
         if event is 'graf': 
             i = 0
             for element in lista_ordenada:
