@@ -412,4 +412,4 @@ def ejer7():
 '''
     Ejer 7 Practica 4
 '''
-ejer7()
+#ejer7()
